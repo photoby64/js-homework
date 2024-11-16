@@ -4,14 +4,6 @@ const user = {
   pw:'spdlqj123!@'
 }
 
-/*
-
-1. email 정규표현식을 사용한 validation
-2. pw 정규표현식을 사용한 validation
-3. 상태 변수 관리
-4. 로그인 버튼을 클릭시 조건처리
-
-*/
 
 
 function emailReg(text){
@@ -19,7 +11,6 @@ function emailReg(text){
 
   return re.test(String(text).toLowerCase())
 }
-
 
 
 
@@ -33,10 +24,12 @@ function emailReg(text){
 
 
 const userEmailInput = document.getElementById('userEmail');
+// let userEmailValue = '';
 
 
 userEmailInput.addEventListener('input', () => {
 
+  // const userEmailValue = userEmailInput.value; // 현재 입력값을 변수로 저장
   const isValid = emailReg(userEmailInput.value); // 입력값 유효성 검사
 
   if(!isValid){
@@ -46,7 +39,11 @@ userEmailInput.addEventListener('input', () => {
     userEmailInput.classList.remove('is--invalid'); // true; 'is--invalid' 제거
 
   }
+
 });
+
+
+
 
 
 
@@ -66,18 +63,19 @@ function pwReg(text){
 }
 
 
-const userPasswordInput = document.getElementById('userPassword');;
+const userPwInput = document.getElementById('userPassword');;
 
 
-userPasswordInput.addEventListener('input', () => {
+userPwInput.addEventListener('input', () => {
 
-  const isValid = pwReg(userPasswordInput.value); // 입력값 유효성 검사
+  // const userPwValue = userPwInput.value; // 현재 입력값을 변수로 저장
+  const isValid = pwReg(userPwInput.value); // 입력값 유효성 검사
 
   if(!isValid){
-    userPasswordInput.classList.add('is--invalid'); // false; 'is--invalid' 추가
+    userPwInput.classList.add('is--invalid'); // false; 'is--invalid' 추가
 
   } else {
-    userPasswordInput.classList.remove('is--invalid'); // true; 'is--invalid' 제거
+    userPwInput.classList.remove('is--invalid'); // true; 'is--invalid' 제거
 
   }
 });
@@ -86,6 +84,24 @@ userPasswordInput.addEventListener('input', () => {
 // 3. 상태 변수 관리
 // 로그인 버튼을 클릭시 user.id의 값과 input의 값을 비교
 // value === user.id
+// 로그인 버튼을 클릭시 user.pw의 값과 input의 값을 비교
+// value === user.pw
+// 4. 로그인 버튼을 클릭시 조건처리
+// 두 값이 일치 한다면 다음 페이지(welcome.html)로 이동
+
+
+const btnLogin = document.querySelector('.btn-login') ;
+
+btnLogin.addEventListener('click', (e) => {
+    e.preventDefault(); // 폼 제출 동작 방지
+
+    if (userEmailInput.value === user.id && userPwInput.value === user.pw){
+      window.location.href = "welcome.html";
+    } else {
+      alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+    }
+
+});
 
 
 
@@ -95,8 +111,4 @@ userPasswordInput.addEventListener('input', () => {
 
 
 
-// 로그인 버튼 클릭시 조건 처리
 
-// document.querySelector('.btn-login').addEventListener('click', () => {
-//   window.location.href = 'welcome.html';
-// })
