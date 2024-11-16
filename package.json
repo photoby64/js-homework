@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently \"live-server client --host=localhost --port=5500 --no-browser\" \"live-server mission01/naver_login --host=localhost --port=5501 --no-browser\"",
+    "dev:login": "live-server mission01/naver_login --host=localhost --port=5501 --no-browser"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "concurrently": "^9.1.0",
     "eslint": "^9.15.0",
     "globals": "^15.12.0",
     "live-server": "^1.2.2",
